@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SignUpActivity">
 
     <ImageView
-        android:id="@+id/loginBg"
+        android:id="@+id/signupBg"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:contentDescription="@string/login_bg_txt"
@@ -17,23 +17,41 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/loginScreenTxt"
+        android:id="@+id/signupScreenTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:text="@string/login_screen_txt"
+        android:text="@string/signup_screen_txt"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/loginBg"
+        app:layout_constraintBottom_toBottomOf="@+id/signupBg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/nameEdt"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:autofillHints="true"
+        android:background="@drawable/auth_edt_bg"
+        android:hint="@string/full_name"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColorHint="@color/grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/signupScreenTxt"
+        app:layout_constraintStart_toStartOf="@+id/signupScreenTxt"
+        app:layout_constraintTop_toBottomOf="@+id/signupBg" />
 
     <EditText
         android:id="@+id/emailAddressEdt"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:autofillHints="true"
         android:background="@drawable/auth_edt_bg"
         android:hint="@string/email_address_edt_txt"
@@ -43,9 +61,9 @@
         android:paddingEnd="16dp"
         android:textColorHint="@color/grey"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/loginScreenTxt"
-        app:layout_constraintStart_toStartOf="@+id/loginScreenTxt"
-        app:layout_constraintTop_toBottomOf="@+id/loginBg" />
+        app:layout_constraintEnd_toEndOf="@+id/nameEdt"
+        app:layout_constraintStart_toStartOf="@+id/nameEdt"
+        app:layout_constraintTop_toBottomOf="@+id/nameEdt" />
 
     <EditText
         android:id="@+id/passwordEdt"
@@ -55,7 +73,7 @@
         android:autofillHints="true"
         android:background="@drawable/auth_edt_bg"
         android:hint="@string/password_edt_txt"
-        android:imeOptions="actionDone"
+        android:imeOptions="actionNext"
         android:inputType="textPassword"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -65,51 +83,42 @@
         app:layout_constraintStart_toStartOf="@+id/emailAddressEdt"
         app:layout_constraintTop_toBottomOf="@+id/emailAddressEdt" />
 
-    <Button
-        android:id="@+id/emailLoginBtn"
+    <EditText
+        android:id="@+id/confirmPasswordEdt"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/primaryBlue"
-        android:text="@string/log_in_btn_txt"
+        android:autofillHints="true"
+        android:background="@drawable/auth_edt_bg"
+        android:hint="@string/confirm_password_edt_txt"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColorHint="@color/grey"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/passwordEdt"
         app:layout_constraintStart_toStartOf="@+id/passwordEdt"
         app:layout_constraintTop_toBottomOf="@+id/passwordEdt" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/or_txt"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/emailLoginBtn"
-        app:layout_constraintStart_toStartOf="@+id/emailLoginBtn"
-        app:layout_constraintTop_toBottomOf="@+id/emailLoginBtn" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/googleSignInBtn"
+    <Button
+        android:id="@+id/emailSignUpBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/accentColor"
-        android:text="@string/sign_in_with_google"
-        android:textColor="@color/grey"
-        android:textSize="14sp"
-        app:icon="@drawable/google_icon"
-        app:iconTintMode="multiply"
-        app:layout_constraintEnd_toEndOf="@+id/emailLoginBtn"
-        app:layout_constraintStart_toStartOf="@+id/emailLoginBtn"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:backgroundTint="@color/primaryBlue"
+        android:text="@string/sign_up_txt"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/confirmPasswordEdt"
+        app:layout_constraintStart_toStartOf="@+id/confirmPasswordEdt"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEdt" />
 
     <TextView
-        android:id="@+id/signUpBtnTxt"
+        android:id="@+id/loginBtnTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/signup_title_txt"
+        android:text="@string/already_have_account_txt"
         android:textColor="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,16 +126,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/signUpBtn"
+        android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="@string/sign_up_txt"
+        android:text="@string/log_in_btn_txt"
         android:textColor="@color/deepBlue"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/signUpBtnTxt"
-        app:layout_constraintStart_toEndOf="@+id/signUpBtnTxt"
-        app:layout_constraintTop_toTopOf="@+id/signUpBtnTxt" />
+        app:layout_constraintBottom_toBottomOf="@+id/loginBtnTxt"
+        app:layout_constraintStart_toEndOf="@+id/loginBtnTxt"
+        app:layout_constraintTop_toTopOf="@+id/loginBtnTxt" />
 
     <ProgressBar
         android:id="@+id/loadingProgress"

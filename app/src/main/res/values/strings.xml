@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">FirebaseExampleApp</string>
+    <string name="web_client_id">604910287764-ang8brbs2flri90fdgstb9714ccd3pdb.apps.googleusercontent.com</string>
+
+    <string name="login_bg_txt">Login Screen Background</string>
+    <string name="email_address_edt_txt">Email address</string>
+    <string name="password_edt_txt">Password</string>
+    <string name="or_txt">or</string>
+    <string name="log_in_btn_txt">Log In</string>
+    <string name="login_screen_txt">Log in \nto start your journey</string>
+    <string name="sign_up_txt">Sign Up</string>
+    <string name="signup_title_txt">Don\'t have an account?</string>
+    <string name="sign_in_with_google">Continue with Google</string>
+    <string name="signup_screen_txt">Sign up \nto start your journey</string>
+    <string name="confirm_password_edt_txt">Confirm Password</string>
+    <string name="already_have_account_txt">Already have an account?</string>
+    <string name="about_team_txt">About Team</string>
+    <string name="team_member_profile_photo">Team Member Profile Photo</string>
+    <string name="team_member_name_1">Shashank Ranjan</string>
+    <string name="social_instagram_txt">Profile Link to Instagram</string>
+    <string name="social_facebook_txt">Profile Link to Facebook</string>
+    <string name="social_twitter_txt">Profile Link to Twitter</string>
+    <string name="social_whatsapp_txt">Profile Link to Whatsapp</string>
+    <string name="feedback_title_txt">Feedback</string>
+    <string name="feedback_screen_bg">Feedback Screen Background</string>
+    <string name="rate_experience_title_txt">Please rate your experience</string>
+    <string name="additional_comments_title_txt">Additional Comments</string>
+    <string name="submit_btn_txt">Submit</string>
+    <string name="full_name">Full Name</string>
+    <string name="notifications">Notifications</string>
+    <string name="search">Search...</string>
+    <string name="new_txt">New</string>
+    <string name="click_here">Link to Notification</string>
+    <string name="refresh_btn_txt">Refresh</string>
+    <string name="log_out">Log Out</string>
 </resources>
