@@ -33,4 +33,5 @@
     <string name="click_here">Link to Notification</string>
     <string name="refresh_btn_txt">Refresh</string>
     <string name="log_out">Log Out</string>
+    <string name="add_user_to_firestore">Add User to Firestore</string>
 </resources>

@@ -9,12 +9,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.toObject
 import com.rajit.firebaseexampleapp.databinding.ActivityHomeBinding
+import com.rajit.firebaseexampleapp.model.UserInfo
+import com.rajit.firebaseexampleapp.util.toUserInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var _binding: ActivityHomeBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +31,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(_binding.root)
 
         auth = Firebase.auth
+        db = Firebase.firestore
 
         _binding.logoutBtn.setOnClickListener {
 
@@ -45,6 +55,35 @@ class HomeActivity : AppCompatActivity() {
             navigateToLoginActivity()
         }
 
+        _binding.addUserDataBtn.setOnClickListener {
+            // Navigate to Add User Data Activity
+            navigateToAddUserActivity()
+        }
+
+        _binding.getDataOnce.setOnClickListener { getDataOnce() }
+
+    }
+
+    private fun getDataOnce() {
+        CoroutineScope(Dispatchers.IO).launch {
+            db.collection("users")
+                .document(auth.currentUser!!.uid)
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+
+                    if (documentSnapshot != null) {
+
+                        val data = documentSnapshot.toUserInfo()
+
+                        Toast.makeText(
+                            applicationContext,
+                            "User: $data",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    }
+                }
+        }
     }
 
     private fun disableAllButtons(disable: Boolean) {
@@ -55,6 +94,11 @@ class HomeActivity : AppCompatActivity() {
         _binding.apply {
             logoutBtn.isEnabled = !disable
         }
+    }
+
+    private fun navigateToAddUserActivity() {
+        val intent = Intent(this@HomeActivity, AddUserActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToLoginActivity() {
