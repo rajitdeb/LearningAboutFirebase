@@ -10,6 +10,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 import com.rajit.firebaseexampleapp.databinding.ActivityHomeBinding
@@ -60,8 +61,45 @@ class HomeActivity : AppCompatActivity() {
             navigateToAddUserActivity()
         }
 
+        _binding.updatedUserFullNameBtn.setOnClickListener {
+            // Update User's Full Name
+            updateUserFullName()
+        }
+
         _binding.getDataOnce.setOnClickListener { getDataOnce() }
 
+    }
+
+    private fun updateUserFullName() {
+        // Here, i'm statically changing the user's full name
+        CoroutineScope(Dispatchers.IO).launch {
+            db.collection("users")
+                .document(auth.currentUser!!.uid)
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if(documentSnapshot != null) {
+
+                        val data = documentSnapshot.toUserInfo()
+
+                        // Updating single field
+                        val updatedName = hashMapOf("fullName" to data.fullName.lowercase())
+
+                        // Posting it to the firestore
+                        db.collection("users")
+                            .document(auth.currentUser!!.uid)
+                            .set(updatedName, SetOptions.merge())
+                            .addOnCompleteListener { task ->
+                                if(task.isSuccessful) {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "User: ${task.result}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                    }
+                }
+        }
     }
 
     private fun getDataOnce() {
@@ -73,6 +111,7 @@ class HomeActivity : AppCompatActivity() {
 
                     if (documentSnapshot != null) {
 
+                        // Mapping Document Snapshot to UserInfo Model using Extension Function
                         val data = documentSnapshot.toUserInfo()
 
                         Toast.makeText(
