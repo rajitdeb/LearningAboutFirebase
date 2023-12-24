@@ -63,10 +63,13 @@ class HomeActivity : AppCompatActivity() {
 
         _binding.updatedUserFullNameBtn.setOnClickListener {
             // Update User's Full Name
-//            updateUserFullName()
+            // updateUserFullName()
 
             // Updating multiple selective fields without updating/overwriting the entire document
             updateEmailAndFullName()
+
+            // For updating Nested fields, Check this link
+            // https://firebase.google.com/docs/firestore/manage-data/add-data?authuser=0&hl=en#update_fields_in_nested_objects
         }
 
         _binding.getDataOnce.setOnClickListener { getDataOnce() }
