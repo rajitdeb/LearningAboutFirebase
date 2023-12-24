@@ -63,11 +63,33 @@ class HomeActivity : AppCompatActivity() {
 
         _binding.updatedUserFullNameBtn.setOnClickListener {
             // Update User's Full Name
-            updateUserFullName()
+//            updateUserFullName()
+
+            // Updating multiple selective fields without updating/overwriting the entire document
+            updateEmailAndFullName()
         }
 
         _binding.getDataOnce.setOnClickListener { getDataOnce() }
 
+    }
+
+    private fun updateEmailAndFullName() {
+        CoroutineScope(Dispatchers.IO).launch {
+            db.collection("users")
+                .document(auth.currentUser!!.uid)
+                .update(
+                    mapOf(
+                        "fullName" to "Maiden Name",
+                        "email" to "updatedEmail@gmail.com"
+                    )
+                )
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(applicationContext, "Update Success", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+        }
     }
 
     private fun updateUserFullName() {
@@ -77,7 +99,7 @@ class HomeActivity : AppCompatActivity() {
                 .document(auth.currentUser!!.uid)
                 .get()
                 .addOnSuccessListener { documentSnapshot ->
-                    if(documentSnapshot != null) {
+                    if (documentSnapshot != null) {
 
                         val data = documentSnapshot.toUserInfo()
 
@@ -89,7 +111,7 @@ class HomeActivity : AppCompatActivity() {
                             .document(auth.currentUser!!.uid)
                             .set(updatedName, SetOptions.merge())
                             .addOnCompleteListener { task ->
-                                if(task.isSuccessful) {
+                                if (task.isSuccessful) {
                                     Toast.makeText(
                                         applicationContext,
                                         "User: ${task.result}",
